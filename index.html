@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio professionnel de Melki Mohamed Aziz, ingénieur en Business Intelligence et développeur full-stack."
+    />
+    <meta name="theme-color" content="#050714" />
+    <title>Melki Mohamed Aziz | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Canvas for Neural Data Constellation Particles -->
+    <canvas id="data-canvas"></canvas>
+
+    <!-- Floating Neon Backdrop Glows -->
+    <div class="ambient-glows">
+      <div class="glow-orb glow-1"></div>
+      <div class="glow-orb glow-2"></div>
+      <div class="glow-orb glow-3"></div>
+    </div>
+
+    <!-- Custom Tech Cursors -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Interactive Bootloader Screen -->
+    <div id="loader">
+      <div class="loader-terminal">
+        <div class="loader-header">
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+        </div>
+        <div class="loader-content" id="loader-content">
+          <!-- Populated dynamically via JS -->
+        </div>
+        <div class="loader-progress-bar"></div>
+        <div class="scanline"></div>
+      </div>
+    </div>
+
+    <!-- Floating Navigation Bar -->
+    <div class="nav-container" id="navbar">
+      <nav class="nav-glass" aria-label="Navigation principale">
+        <a href="#home" class="logo-link">
+          <span class="logo-badge">MA</span>
+          <span>Aziz.dev</span>
+        </a>
+        <div class="nav-links-wrap">
+          <a href="#about" class="nav-link-item">À propos</a>
+          <a href="#experience" class="nav-link-item">Expériences</a>
+          <a href="#projects" class="nav-link-item">Projets</a>
+          <a href="#skills" class="nav-link-item">Compétences</a>
+          <a href="#certifications" class="nav-link-item">Certifications</a>
+          <a href="#contact" class="btn btn-secondary nav-cta">Me contacter</a>
+        </div>
+        <button class="mobile-nav-toggle" aria-label="Menu principal" id="nav-toggle">
+          ☰
+        </button>
+      </nav>
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="home" class="section hero">
+        <div class="hero-left">
+          <div class="hero-badge-available">
+            <span></span>Disponible pour des opportunités
+          </div>
+          <h1>Bonjour, je suis<br /><span>Melki Mohamed Aziz</span></h1>
+          <h2>Ingénieur en Business Intelligence &amp; Développeur Full-Stack</h2>
+          
+          <!-- Cyber Terminal Card -->
+          <div class="hero-terminal">
+            <div class="terminal-titlebar">
+              <div class="terminal-buttons">
+                <span class="terminal-btn"></span>
+                <span class="terminal-btn"></span>
+                <span class="terminal-btn"></span>
+              </div>
+              <span class="terminal-tab-name">profile_query.sql</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-row">
+                <span class="terminal-prompt">&gt;</span><span class="terminal-command">SELECT * FROM engineers WHERE profile = 'Aziz';</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out cyan">{</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out">&nbsp;&nbsp;institution: "ESPRIT Tunis (2021 - 2026)",</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out">&nbsp;&nbsp;specialite: "Business Intelligence &amp; Data",</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out">&nbsp;&nbsp;PFE: "UBCI - Blockchain &amp; Supervision Interbancaire",</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out">&nbsp;&nbsp;competences: ["ETL/BI", "Full-Stack Dev", "Smart Contracts"],</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out">&nbsp;&nbsp;localisation: "Tunis, Tunisie"</span>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-out cyan">};</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#projects">Découvrir mes projets</a>
+            <a class="btn btn-secondary" href="#contact">Me contacter</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="portrait-frame">
+            <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" />
+            <div class="floating-badge badge-xp">
+              <span class="number">5</span>
+              <span class="label">Ans<br/>d'études</span>
+            </div>
+            <div class="floating-badge badge-projects">
+              <span class="number">6+</span>
+              <span class="label">Projets<br/>Réalisés</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section">
+        <p class="eyebrow">À propos de moi</p>
+        <h2 class="section-title">Créer de la valeur par <span>la Data &amp; le Code</span></h2>
+        <div class="about-grid">
+          <div class="about-content">
+            <p>
+              Actuellement étudiant en 5ème année d'ingénierie informatique à <strong>ESPRIT Tunis</strong>, avec une spécialisation en <strong>Business Intelligence (BI)</strong>, mon parcours académique (2021-2026) m'a fourni un double profil unique entre l'analyse approfondie de données et le développement d'applications logicielles.
+            </p>
+            <p>
+              Pendant mon stage de PFE au sein de l'<strong>UBCI</strong>, j'ai l'occasion d'appliquer ces compétences en concevant un système décentralisé de transferts interbancaires sur la blockchain Ethereum, avec des outils d'automatisation et de supervision de conformité.
+            </p>
+            <p>
+              Je m'intéresse de près à l'automatisation, au Data Warehousing, à l'intelligence artificielle et à l'architecture logicielle, afin d'aider les organisations à transformer leurs données complexes en décisions stratégiques.
+            </p>
+            
+            <div class="about-highlights">
+              <div class="highlight-box">
+                <span class="title">Data / BI</span>
+                <span class="val">Modélisation en étoile, ETL (Pentaho), Dashboards Power BI.</span>
+              </div>
+              <div class="highlight-box">
+                <span class="title">Full-Stack</span>
+                <span class="val">Développement robuste en Angular, Node.js et bases de données SQL/NoSQL.</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="about-tags">
+            <span>Business Intelligence</span>
+            <span>Data Warehouse</span>
+            <span>ETL Pentaho</span>
+            <span>Power BI</span>
+            <span>Angular</span>
+            <span>Node.js</span>
+            <span>Solidity / Web3</span>
+            <span>Python / Machine Learning</span>
+            <span>PostgreSQL</span>
+            <span>Docker</span>
+            <span>Agilité (Scrum)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="section">
+        <p class="eyebrow">Parcours</p>
+        <h2 class="section-title">Expérience <span>Académique &amp; Pro</span></h2>
+        
+        <div class="timeline">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3>Stage de Fin d'Études — UBCI</h3>
+                <span class="timeline-date">Février 2026 — Présent</span>
+              </div>
+              <p class="timeline-desc">
+                Conception et implémentation d'une plateforme de paiements transfrontaliers interbancaires décentralisés sur la blockchain Ethereum. Intégration de contrats intelligents sécurisés (Solidity), de règles de conformité AML automatiques (Anti-Money Laundering), et développement d'un tableau de bord administratif complet de supervision bancaire.
+              </p>
+              <div class="timeline-skills">
+                <span>Ethereum</span>
+                <span>Solidity</span>
+                <span>Hardhat</span>
+                <span>Angular</span>
+                <span>Node.js</span>
+                <span>PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3>Cursus d'Ingénieur — ESPRIT Tunis</h3>
+                <span class="timeline-date">2021 — 2026</span>
+              </div>
+              <p class="timeline-desc">
+                Cycle de 5 ans en Génie Informatique, spécialisation finale en Business Intelligence. Formation théorique et pratique approfondie : bases de données décisionnelles, entrepôts de données, extraction de données (Data Mining), modélisation prédictive, administration système, et gestion de projets agiles.
+              </p>
+              <div class="timeline-skills">
+                <span>Business Intelligence</span>
+                <span>Data Science</span>
+                <span>Génie Logiciel</span>
+                <span>SQL Server</span>
+                <span>NoSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3>Projets Académiques &amp; Collaborations</h3>
+                <span class="timeline-date">2023 — 2025</span>
+              </div>
+              <p class="timeline-desc">
+                Réalisation de plusieurs architectures applicatives et décisionnelles dans le cadre de projets d'études et de collaborations : conception de pipelines d'intégration de données complexes, modèles de prédiction de données médicales, et plateformes transactionnelles pour le transport ferroviaire.
+              </p>
+              <div class="timeline-skills">
+                <span>PHP</span>
+                <span>Python</span>
+                <span>ETL Pentaho</span>
+                <span>Power BI</span>
+                <span>MySQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section">
+        <p class="eyebrow">Réalisations</p>
+        <h2 class="section-title">Sélection de <span>Projets Marquants</span></h2>
+        <p class="section-desc">Découvrez mes travaux phares en Business Intelligence, Ingénierie des données et développement Web.</p>
+
+        <!-- Category Filters -->
+        <div class="portfolio-filters">
+          <button class="filter-btn active" data-filter="all">Tous les projets</button>
+          <button class="filter-btn" data-filter="data">BI &amp; Data Engineering</button>
+          <button class="filter-btn" data-filter="web">Développement Web</button>
+          <button class="filter-btn" data-filter="blockchain">Blockchain &amp; Web3</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 (PFE UBCI) -->
+          <article class="project-card" data-category="blockchain">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">UBCI Crossborder Payment</span>
+                </div>
+                <div class="mock-content">
+                  <div class="project-vector-art">
+                    ⛓️
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">PFE / Stage</span>
+                <span class="project-star">⭐ Projet Vedette</span>
+              </div>
+              <h3>CrossBorder Payment Blockchain</h3>
+              <p class="project-desc">
+                Système décentralisé sécurisant les transferts de fonds internationaux entre banques. Intègre des Smart Contracts Solidity sous Hardhat, des transferts d'actifs avec conversion de devises fictives en temps réel, un mécanisme d'approbation multi-signature et un filtre de conformité AML.
+              </p>
+              <div class="project-tags">
+                <span>Solidity</span>
+                <span>Hardhat</span>
+                <span>Node.js</span>
+                <span>Angular</span>
+                <span>Ethereum</span>
+              </div>
+              <div class="project-links">
+                <a href="#contact" class="project-link-btn">Demander des détails</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 (Data Warehouse Power BI) -->
+          <article class="project-card" data-category="data">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Esprit Academic Warehouse</span>
+                </div>
+                <div class="mock-content">
+                  <img src="images/dashboard1.png" alt="ESPRIT Data Warehouse Power BI Dashboard" class="project-img" />
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">Business Intelligence</span>
+              </div>
+              <h3>Academic Data Warehouse</h3>
+              <p class="project-desc">
+                Conception d'un entrepôt de données académique pour l'école ESPRIT. Modélisation en étoile complexe, pipelines ETL automatisés sous Pentaho Data Integration, et tableau de bord interactif Power BI visualisant le taux de réussite, la répartition par spécialité et le suivi des modules.
+              </p>
+              <div class="project-tags">
+                <span>PostgreSQL</span>
+                <span>Pentaho ETL</span>
+                <span>Power BI</span>
+                <span>Modélisation</span>
+              </div>
+              <div class="project-links">
+                <a href="https://app.powerbi.com/links/S7fYEMOc_N?ctid=604f1a96-cbe8-43f8-abbf-f8eaf5d85730&pbi_source=linkShare" target="_blank" rel="noreferrer" class="project-link-btn">Consulter le Dashboard</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 (Healthcare Dashboard Application) -->
+          <article class="project-card" data-category="data">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Healthcare BI App</span>
+                </div>
+                <div class="mock-content">
+                  <img src="images/dashboard2.png" alt="Healthcare Analytics Dashboard" class="project-img" />
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">Web &amp; Data Science</span>
+              </div>
+              <h3>Healthcare BI Application</h3>
+              <p class="project-desc">
+                Application médicale associant un frontend Angular, des tableaux de bord analytiques Power BI et un moteur Flask de Machine Learning prédisant la durée moyenne d'hospitalisation à partir d'antécédents cliniques.
+              </p>
+              <div class="project-tags">
+                <span>Angular</span>
+                <span>Flask</span>
+                <span>Power BI</span>
+                <span>Machine Learning</span>
+              </div>
+              <div class="project-links">
+                <a href="https://app.powerbi.com/groups/me/reports/ed93ef03-19e0-4950-a0b3-e91066d5500c/ReportSection441619c8313d8e918b9e?ctid=604f1a96-cbe8-43f8-abbf-f8eaf5d85730&experience=power-bi" target="_blank" rel="noreferrer" class="project-link-btn">Dashboard Docteur</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 (SNCFT Ticket Purchase) -->
+          <article class="project-card" data-category="web">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">SNCFT Online Ticket</span>
+                </div>
+                <div class="mock-content">
+                  <img src="images/dashboard3.png" alt="SNCFT Booking Analytics Dashboard" class="project-img" />
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">Full-Stack Application</span>
+              </div>
+              <h3>SNCFT Ticket Booking System</h3>
+              <p class="project-desc">
+                Portail web de réservation ferroviaire pour la SNCFT. Inscription sécurisée des voyageurs, recherche et sélection de trains selon des grilles tarifaires et horaires, paiement virtuel, génération de billets munis de codes QR uniques, et console d'administration analytique.
+              </p>
+              <div class="project-tags">
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>JavaScript</span>
+                <span>QR Code API</span>
+              </div>
+              <div class="project-links">
+                <a href="https://sncftonlinetickets.kesug.com" target="_blank" rel="noreferrer" class="project-link-btn">Visiter le Site Web</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5 (Aroteq RH) -->
+          <article class="project-card" data-category="web">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Aroteq RH Portal</span>
+                </div>
+                <div class="mock-content">
+                  <div class="project-vector-art" style="font-size: 1.8rem;">
+                    👥 Aroteq RH
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">Application Entreprise</span>
+              </div>
+              <h3>Aroteq RH</h3>
+              <p class="project-desc">
+                Portail d'entreprise pour les Ressources Humaines simplifiant la gestion des collaborateurs : suivi des heures de présence, workflow de demandes de congés, catalogue de sessions de formation et tableaux de bord analytiques pour le service RH.
+              </p>
+              <div class="project-tags">
+                <span>PHP 7.4</span>
+                <span>MySQL</span>
+                <span>PHPMailer</span>
+                <span>RBAC Security</span>
+              </div>
+              <div class="project-links">
+                <a href="https://aroteq.kesug.com" target="_blank" rel="noreferrer" class="project-link-btn">Visiter le Site Web</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6 (Portfolio) -->
+          <article class="project-card" data-category="web">
+            <div class="project-visual">
+              <div class="project-dashboard-mock">
+                <div class="mock-titlebar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Portfolio v2</span>
+                </div>
+                <div class="mock-content">
+                  <div class="project-vector-art">
+                    ✨
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-category">Site Personnel</span>
+              </div>
+              <h3>Portfolio Interactif</h3>
+              <p class="project-desc">
+                Site vitrine moderne, responsive et hautement interactif conçu pour exposer mes réalisations décisionnelles et applicatives. Intègre des animations graphiques de particules, un curseur cinétique et des interfaces adaptatives.
+              </p>
+              <div class="project-tags">
+                <span>HTML5</span>
+                <span>CSS3 Glass</span>
+                <span>JavaScript ES6</span>
+              </div>
+              <div class="project-links">
+                <a href="#home" class="project-link-btn">Retour en haut</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section">
+        <p class="eyebrow">Compétences</p>
+        <h2 class="section-title">Mon <span>Arsenal Technique</span></h2>
+        <p class="section-desc">Expertise couvrant l'analyse de données, l'ingénierie décisionnelle, le code d'applications et les protocoles Web3.</p>
+
+        <div class="skills-grid">
+          <!-- Card 1: BI & Data -->
+          <div class="skill-category-card">
+            <h3>Data &amp; Business Intelligence</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Power BI</span>
+                  <span class="skill-percentage">90%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="90%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">ETL (Pentaho PDI)</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">PostgreSQL / MySQL</span>
+                  <span class="skill-percentage">88%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="88%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Data Warehouse (En étoile)</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Frontend -->
+          <div class="skill-category-card">
+            <h3>Développement Frontend</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Angular</span>
+                  <span class="skill-percentage">82%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="82%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">JavaScript / TypeScript</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">HTML5 / CSS3 / Grid / Flex</span>
+                  <span class="skill-percentage">90%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="90%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Bootstrap</span>
+                  <span class="skill-percentage">88%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="88%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Backend -->
+          <div class="skill-category-card">
+            <h3>Développement Backend</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Node.js / Express</span>
+                  <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="80%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">PHP / MVC Architecture</span>
+                  <span class="skill-percentage">82%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="82%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Python / Flask</span>
+                  <span class="skill-percentage">75%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Web3 & DevOps -->
+          <div class="skill-category-card">
+            <h3>Blockchain &amp; DevOps</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Solidity / Smart Contracts</span>
+                  <span class="skill-percentage">78%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="78%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Hardhat / Web3.js</span>
+                  <span class="skill-percentage">75%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="75%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Git / GitHub</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item-row">
+                <div class="skill-label-info">
+                  <span class="skill-name">Docker / DevOps Basics</span>
+                  <span class="skill-percentage">70%</span>
+                </div>
+                <div class="skill-bar-outer">
+                  <div class="skill-bar-inner" data-val="70%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications Section -->
+      <section id="certifications" class="section">
+        <p class="eyebrow">Certifications</p>
+        <h2 class="section-title">Certificats <span>&amp; Formations</span></h2>
+        
+        <div class="certifications-grid">
+          <!-- Cert 1: AWS -->
+          <div class="cert-card">
+            <div class="cert-badge-visual">☁️</div>
+            <h3>AWS Academy Graduate</h3>
+            <span class="cert-issuer">AWS Academy — Cloud Foundations</span>
+            <p class="cert-desc">
+              Compréhension approfondie des architectures cloud AWS, de la sécurité des infrastructures, du stockage, des réseaux et des concepts fondamentaux de facturation cloud.
+            </p>
+            <a href="images/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20251113-31-3ndpur.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
+              Voir la certification PDF &rarr;
+            </a>
+          </div>
+
+          <!-- Cert 2: Blockchain -->
+          <div class="cert-card">
+            <div class="cert-badge-visual">⛓️</div>
+            <h3>Certification Blockchain</h3>
+            <span class="cert-issuer">Formation Spécialisée</span>
+            <p class="cert-desc">
+              Validation des connaissances fondamentales sur les chaînes de blocs, les applications décentralisées (dApps), l'architecture de consensus, la cryptographie et le codage Solidity.
+            </p>
+            <a href="images/Certificat%20Blockchain.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
+              Voir la certification PDF &rarr;
+            </a>
+          </div>
+
+          <!-- Cert 3: Deep Learning -->
+          <div class="cert-card">
+            <div class="cert-badge-visual">🧠</div>
+            <h3>Fundamentals of Deep Learning</h3>
+            <span class="cert-issuer">NVIDIA Deep Learning Institute</span>
+            <p class="cert-desc">
+              Formation pratique sur les réseaux de neurones profonds, la détection d'objets, la classification d'images et l'optimisation des architectures d'apprentissage machine.
+            </p>
+            <!-- Visual display of DL certificate PNG -->
+            <div class="cert-visual-container">
+              <img src="images/Fundamentals%20of%20Deep%20Learning.png" alt="Fundamentals of Deep Learning Certificate" class="cert-preview-img" />
+            </div>
+            <a href="images/Fundamentals%20of%20Deep%20Learning.png" target="_blank" rel="noreferrer" class="cert-action-btn">
+              Agrandir le Certificat &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section">
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Discutons de vos <span>Projets</span></h2>
+        
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Commençons une collaboration !</h3>
+            <p>
+              Je suis disponible pour des opportunités professionnelles, des projets de Data/Business Intelligence ou des projets applicatifs Full-Stack. N'hésitez pas à me joindre directement.
+            </p>
+            
+            <div class="contact-methods">
+              <a href="mailto:melki.mohamedaziz@esprit.tn" class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div class="contact-details">
+                  <span class="label">Email</span>
+                  <span class="value">melki.mohamedaziz@esprit.tn</span>
+                </div>
+              </a>
+              <a href="tel:+21699725878" class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-details">
+                  <span class="label">Téléphone</span>
+                  <span class="value">+216 99 725 878</span>
+                </div>
+              </a>
+              <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-details">
+                  <span class="label">Localisation</span>
+                  <span class="value">Tunis, Tunisie</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Glass Form -->
+          <form class="contact-form" id="portfolio-form" action="https://formspree.io/f/xvonzlze" method="POST">
+            <div class="form-group">
+              <label for="name">Votre Nom</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="ex: Jean Dupont" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Votre Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="ex: jean.dupont@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Votre Message</label>
+              <textarea id="message" name="message" class="form-input" placeholder="Décrivez votre projet ou opportunité..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Envoyer le Message</button>
+            <div class="form-status-msg" id="form-status"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="logo-badge">MA</span>
+          <span>Aziz.dev</span>
+        </div>
+        <div class="footer-links">
+          <a href="#about">À propos</a>
+          <a href="#experience">Parcours</a>
+          <a href="#projects">Projets</a>
+          <a href="#skills">Compétences</a>
+          <a href="#certifications">Certifications</a>
+        </div>
+        <p class="footer-copy">&copy; <span id="year"></span> Melki Mohamed Aziz. Tous droits réservés. Conçu avec créativité.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
