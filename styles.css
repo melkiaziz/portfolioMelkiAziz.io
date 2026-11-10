@@ -649,10 +649,24 @@ main {
   display: flex;
   justify-content: center;
   position: relative;
+  isolation: isolate;
+}
+
+.hero-scene-canvas {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(520px, 126vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.82;
 }
 
 .portrait-frame {
   position: relative;
+  z-index: 1;
   width: min(340px, 80vw);
   aspect-ratio: 1 / 1.1;
   background: var(--glass-bg);
@@ -1634,6 +1648,10 @@ footer {
   .hero-ctas {
     justify-content: center;
   }
+
+  .hero-scene-canvas {
+    width: min(460px, 100vw);
+  }
   
   .about-grid {
     grid-template-columns: 1fr;
@@ -1666,6 +1684,11 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .hero-scene-canvas {
+    width: min(360px, 100vw);
+    opacity: 0.68;
+  }
+
   .hero-ctas {
     flex-direction: column;
     width: 100%;
@@ -1689,5 +1712,20 @@ footer {
   
   .contact-container {
     padding: 1.5rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -76,7 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let targetMouseX = mouseX;
   let targetMouseY = mouseY;
 
-  if (cursorDot && cursorRing && !isTouchDevice()) {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (cursorDot && cursorRing && !isTouchDevice() && !reducedMotionQuery.matches) {
     document.body.classList.add('custom-cursor-active');
     cursorDot.style.display = 'block';
     cursorRing.style.display = 'block';
@@ -91,7 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Lerp loop for fluid trailing effect
+    let cursorAnimationId;
     const tickCursor = () => {
+      if (document.hidden) return;
+
       // Direct placement for dot
       mouseX = targetMouseX;
       mouseY = targetMouseY;
@@ -106,9 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorRing.style.left = `${ringX}px`;
       cursorRing.style.top = `${ringY}px`;
 
-      requestAnimationFrame(tickCursor);
+      cursorAnimationId = requestAnimationFrame(tickCursor);
     };
     tickCursor();
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(cursorAnimationId);
+      } else {
+        tickCursor();
+      }
+    });
 
     // Hover effect on links and buttons
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .cert-card, .highlight-box, .filter-btn');
@@ -206,20 +218,47 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    function loop() {
+    function drawFrame(animate) {
       ctx.clearRect(0, 0, w, h);
       
       particles.forEach(p => {
-        p.update();
+        if (animate) p.update();
         p.draw();
       });
       
       connectParticles();
+    }
+
+    function loop() {
+      if (document.hidden || reducedMotionQuery.matches) return;
+
+      drawFrame(true);
       animationId = requestAnimationFrame(loop);
     }
 
     createParticles();
-    loop();
+    if (reducedMotionQuery.matches) {
+      drawFrame(false);
+    } else {
+      loop();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else if (!reducedMotionQuery.matches) {
+        loop();
+      }
+    });
+
+    reducedMotionQuery.addEventListener('change', () => {
+      if (reducedMotionQuery.matches) {
+        cancelAnimationFrame(animationId);
+        drawFrame(false);
+      } else if (!document.hidden) {
+        loop();
+      }
+    });
   }
 
 

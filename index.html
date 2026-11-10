@@ -12,6 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- Canvas for Neural Data Constellation Particles -->
@@ -120,6 +127,7 @@
         </div>
 
         <div class="hero-right">
+          <canvas class="hero-scene-canvas" id="hero-scene" aria-hidden="true"></canvas>
           <div class="portrait-frame">
             <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" />
             <div class="floating-badge badge-xp">
@@ -849,5 +857,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="hero-scene.js"></script>
   </body>
 </html>
