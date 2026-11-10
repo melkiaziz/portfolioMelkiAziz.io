@@ -45,6 +45,9 @@ if (!reducedMotion.matches) {
       document.body.dataset.sceneFallback = 'true';
       console.warn('3D scene unavailable; using the static visual fallback.', error);
     });
+  trackReady(loadLocalModule('js/scroll.js')
+    .then(({ initScrollExperience }) => initScrollExperience())
+    .catch(error => console.warn('Scroll animations unavailable; native scrolling remains active.', error)));
 }
 trackReady(sceneReady);
 
