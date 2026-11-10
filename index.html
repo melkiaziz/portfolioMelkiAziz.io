@@ -11,44 +11,44 @@
     <title>Melki Mohamed Aziz | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/experience.css?v=3" />
+    <link rel="stylesheet" href="css/scroll.css?v=2" />
+    <link rel="stylesheet" href="css/skills.css" />
+    <link rel="stylesheet" href="css/projects.css" />
+    <link rel="stylesheet" href="css/cursor.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/secret.css" />
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+          "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.14.2/index.js",
+          "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.14.2/ScrollTrigger.js"
         }
       }
     </script>
   </head>
   <body>
-    <!-- Canvas for Neural Data Constellation Particles -->
-    <canvas id="data-canvas"></canvas>
-
-    <!-- Floating Neon Backdrop Glows -->
-    <div class="ambient-glows">
-      <div class="glow-orb glow-1"></div>
-      <div class="glow-orb glow-2"></div>
-      <div class="glow-orb glow-3"></div>
-    </div>
+    <canvas id="scene-canvas" aria-hidden="true"></canvas>
 
     <!-- Custom Tech Cursors -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-ring" id="cursor-ring"></div>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
-    <!-- Interactive Bootloader Screen -->
-    <div id="loader">
-      <div class="loader-terminal">
-        <div class="loader-header">
-          <span class="loader-dot"></span>
-          <span class="loader-dot"></span>
-          <span class="loader-dot"></span>
-        </div>
-        <div class="loader-content" id="loader-content">
-          <!-- Populated dynamically via JS -->
-        </div>
-        <div class="loader-progress-bar"></div>
-        <div class="scanline"></div>
+    <div id="loader" role="status" aria-live="polite" aria-label="Chargement du portfolio">
+      <div class="loader-mark" aria-hidden="true">MA<span>.</span></div>
+      <p class="loader-caption">Initialisation de l'univers</p>
+      <div class="loader-meter" role="progressbar" aria-label="Chargement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="loader-progress-bar" id="loader-progress"></span>
       </div>
+      <span class="loader-percent" id="loader-percent">0%</span>
     </div>
 
     <!-- Floating Navigation Bar -->
@@ -58,7 +58,7 @@
           <span class="logo-badge">MA</span>
           <span>Aziz.dev</span>
         </a>
-        <div class="nav-links-wrap">
+        <div class="nav-links-wrap" id="primary-navigation">
           <a href="#about" class="nav-link-item">À propos</a>
           <a href="#experience" class="nav-link-item">Expériences</a>
           <a href="#projects" class="nav-link-item">Projets</a>
@@ -66,7 +66,7 @@
           <a href="#certifications" class="nav-link-item">Certifications</a>
           <a href="#contact" class="btn btn-secondary nav-cta">Me contacter</a>
         </div>
-        <button class="mobile-nav-toggle" aria-label="Menu principal" id="nav-toggle">
+        <button class="mobile-nav-toggle" aria-label="Ouvrir le menu principal" aria-controls="primary-navigation" aria-expanded="false" id="nav-toggle">
           ☰
         </button>
       </nav>
@@ -127,9 +127,8 @@
         </div>
 
         <div class="hero-right">
-          <canvas class="hero-scene-canvas" id="hero-scene" aria-hidden="true"></canvas>
           <div class="portrait-frame">
-            <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" />
+            <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" width="200" height="200" decoding="async" fetchpriority="high" />
             <div class="floating-badge badge-xp">
               <span class="number">5</span>
               <span class="label">Ans<br/>d'études</span>
@@ -366,7 +365,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Esprit Academic Warehouse</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard1.png" alt="ESPRIT Data Warehouse Power BI Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard1.webp" alt="ESPRIT Data Warehouse Power BI Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -401,7 +400,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Healthcare BI App</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard2.png" alt="Healthcare Analytics Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard2.webp" alt="Healthcare Analytics Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -436,7 +435,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">SNCFT Online Ticket</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard3.png" alt="SNCFT Booking Analytics Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard3.webp" alt="SNCFT Booking Analytics Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -541,9 +540,25 @@
         <h2 class="section-title">Mon <span>Arsenal Technique</span></h2>
         <p class="section-desc">Expertise couvrant l'analyse de données, l'ingénierie décisionnelle, le développement d'applications et les protocoles Web3.</p>
 
+        <div class="skills-constellation" role="tablist" aria-label="Domaines de compétences">
+          <button class="skill-node is-active" type="button" role="tab" id="skill-tab-bi" aria-selected="true" aria-controls="skill-cluster-detail" tabindex="0" data-skill-cluster="bi">
+            <span class="skill-node-index">01</span><span>BI &amp; Data</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-chain" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="blockchain">
+            <span class="skill-node-index">02</span><span>Blockchain</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-web" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="web">
+            <span class="skill-node-index">03</span><span>Full-stack Web</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-ai" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="ai">
+            <span class="skill-node-index">04</span><span>IA &amp; ML</span>
+          </button>
+        </div>
+        <div class="skill-cluster-detail" id="skill-cluster-detail" role="tabpanel" aria-live="polite" aria-labelledby="skill-tab-bi"></div>
+
         <div class="skills-grid">
           <!-- Card 1: BI & Data -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-bi" data-skill-group="bi">
             <h3>Data &amp; Business Intelligence</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -586,7 +601,7 @@
           </div>
 
           <!-- Card 2: Frontend -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-frontend" data-skill-group="web">
             <h3>Développement Frontend</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -629,7 +644,7 @@
           </div>
 
           <!-- Card 3: Backend -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-backend" data-skill-group="web">
             <h3>Développement Backend</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -663,7 +678,7 @@
           </div>
 
           <!-- Card 4: Web3 & DevOps -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-blockchain" data-skill-group="blockchain">
             <h3>Blockchain &amp; DevOps</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -704,6 +719,15 @@
               </div>
             </div>
           </div>
+          <div class="skill-category-card" id="skill-card-ai" data-skill-group="ai">
+            <h3>Intelligence Artificielle &amp; Machine Learning</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">BERT / NLP</span><span class="skill-percentage">84%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="84%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">Graph-RAG</span><span class="skill-percentage">80%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="80%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">TensorFlow</span><span class="skill-percentage">76%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="76%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">Machine Learning</span><span class="skill-percentage">78%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="78%"></div></div></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -722,7 +746,7 @@
               Compréhension approfondie des architectures cloud AWS, de la sécurité des infrastructures, du stockage, des réseaux et des concepts fondamentaux de facturation cloud.
             </p>
             <div class="cert-visual-container">
-              <img src="images/certificat aws.png" alt="AWS Academy Cloud Foundations Certificate" class="cert-preview-img" />
+              <img src="images/optimized/certificat-aws.webp" alt="AWS Academy Cloud Foundations Certificate" class="cert-preview-img" width="806" height="621" loading="lazy" decoding="async" />
             </div>
             <a href="images/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20251113-31-3ndpur.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir la certification &rarr;
@@ -738,7 +762,7 @@
               Validation des connaissances fondamentales sur les chaînes de blocs, les applications décentralisées (dApps), l'architecture de consensus, la cryptographie et le développement Solidity.
             </p>
             <div class="cert-visual-container">
-              <img src="images/certificat blockchain.png" alt="Certification Blockchain" class="cert-preview-img" />
+              <img src="images/optimized/certificat-blockchain.webp" alt="Certification Blockchain" class="cert-preview-img" width="1200" height="641" loading="lazy" decoding="async" />
             </div>
             <a href="images/Certificat%20Blockchain.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir la certification &rarr;
@@ -755,7 +779,7 @@
             </p>
             <!-- Visual display of DL certificate PNG -->
             <div class="cert-visual-container">
-              <img src="images/Fundamentals%20of%20Deep%20Learning.png" alt="Fundamentals of Deep Learning Certificate" class="cert-preview-img" />
+              <img src="images/optimized/deep-learning.webp" alt="Fundamentals of Deep Learning Certificate" class="cert-preview-img" width="849" height="1200" loading="lazy" decoding="async" />
             </div>
             <a href="images/Fundamentals%20of%20Deep%20Learning.png" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir le certificat &rarr;
@@ -771,7 +795,7 @@
               Certificat IELTS officiel attestant d'une maîtrise de la langue anglaise pour la communication académique et professionnelle.
             </p>
             <div class="cert-visual-container">
-              <img src="images/ilets.png" alt="Certificat IELTS" class="cert-preview-img" />
+              <img src="images/optimized/ielts.webp" alt="Certificat IELTS" class="cert-preview-img" width="552" height="790" loading="lazy" decoding="async" />
             </div>
             <a href="images/ilets Melki Aziz.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir le certificat &rarr;
@@ -832,7 +856,7 @@
               <textarea id="message" name="message" class="form-input" placeholder="Décrivez votre projet ou opportunité..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Envoyer le message</button>
-            <div class="form-status-msg" id="form-status"></div>
+            <div class="form-status-msg" id="form-status" role="status" aria-live="polite" aria-atomic="true"></div>
           </form>
         </div>
       </section>
@@ -857,6 +881,18 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="hero-scene.js"></script>
+    <script>
+      fetch('js/app.js')
+        .then(response => {
+          if (!response.ok) throw new Error('Portfolio module unavailable.');
+          return response.text();
+        })
+        .then(source => import(URL.createObjectURL(new Blob([source], { type: 'text/javascript' }))))
+        .catch(error => {
+          document.body.dataset.sceneFallback = 'true';
+          document.getElementById('loader')?.classList.add('fade-out');
+          console.error('Portfolio initialization failed.', error);
+        });
+    </script>
   </body>
 </html>
