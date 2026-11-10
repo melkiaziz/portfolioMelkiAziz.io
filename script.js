@@ -5,147 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     yearElement.textContent = new Date().getFullYear();
   }
 
-  // Detect mobile device
-  const isTouchDevice = () => {
-    return (('ontouchstart' in window) ||
-      (navigator.maxTouchPoints > 0) ||
-      (navigator.msMaxTouchPoints > 0));
-  };
-
-  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  /* ── 2. Legacy Canvas Fallback ───────────────────────────────────────────── */
-  const canvas = document.getElementById('data-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationId;
-    
-    let w = canvas.width = window.innerWidth;
-    let h = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      createParticles();
-    });
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 2 + 1;
-        this.baseColor = Math.random() > 0.4 ? 'rgba(0, 240, 255, ' : 'rgba(168, 85, 247, ';
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Bounce borders
-        if (this.x < 0 || this.x > w) this.vx = -this.vx;
-        if (this.y < 0 || this.y > h) this.vy = -this.vy;
-
-        // React to mouse slightly
-        if (!isTouchDevice()) {
-          const dx = targetMouseX - this.x;
-          const dy = targetMouseY - this.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            // Smooth repulsion
-            const force = (120 - dist) / 120;
-            this.x -= dx / dist * force * 0.5;
-            this.y -= dy / dist * force * 0.5;
-          }
-        }
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.baseColor + '0.4)';
-        ctx.fill();
-      }
-    }
-
-    function createParticles() {
-      particles = [];
-      const count = Math.min(Math.floor(w / 14), 100);
-      for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function connectParticles() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
-          const p2 = particles[j];
-          
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 100) {
-            const alpha = (100 - dist) / 100 * 0.12;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function drawFrame(animate) {
-      ctx.clearRect(0, 0, w, h);
-      
-      particles.forEach(p => {
-        if (animate) p.update();
-        p.draw();
-      });
-      
-      connectParticles();
-    }
-
-    function loop() {
-      if (document.hidden || reducedMotionQuery.matches) return;
-
-      drawFrame(true);
-      animationId = requestAnimationFrame(loop);
-    }
-
-    createParticles();
-    if (reducedMotionQuery.matches) {
-      drawFrame(false);
-    } else {
-      loop();
-    }
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(animationId);
-      } else if (!reducedMotionQuery.matches) {
-        loop();
-      }
-    });
-
-    reducedMotionQuery.addEventListener('change', () => {
-      if (reducedMotionQuery.matches) {
-        cancelAnimationFrame(animationId);
-        drawFrame(false);
-      } else if (!document.hidden) {
-        loop();
-      }
-    });
-  }
-
-
-  /* ── 4. Scrolling Navbar & Active Spy ─────────────────────────────────────── */
+  /* ── 1. Scrolling Navbar ──────────────────────────────────────────────────── */
   const navbar = document.getElementById('navbar');
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link-item');
@@ -291,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ── 1. Legacy Canvas Fallback ───────────────────────────────────────────── */
+  /* ── 2. Mobile Navigation ─────────────────────────────────────────────────── */
   const navToggle = document.getElementById('nav-toggle');
   const navLinksWrap = document.querySelector('.nav-links-wrap');
 

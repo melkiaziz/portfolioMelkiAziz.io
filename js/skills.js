@@ -65,6 +65,7 @@ export function initSkills() {
       else return;
       event.preventDefault();
       tabs[nextIndex].focus();
+      activate(tabs[nextIndex]);
     });
   });
 

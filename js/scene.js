@@ -4,6 +4,7 @@ import {
   Float32BufferAttribute,
   LineBasicMaterial,
   LineSegments,
+  NormalBlending,
   PerspectiveCamera,
   Points,
   Scene,
@@ -53,7 +54,10 @@ function createNetwork(count) {
       colors[offset + 2] = blue;
       sizes[index] = 1.4 + ((index * 17) % 10) * 0.17;
       phases[index] = (index % 97) * 0.13;
+    }
 
+    for (let index = first; index < last; index += 1) {
+      const offset = index * 3;
       for (const step of [1, 13, 37]) {
         const neighbor = index + step;
         if (neighbor < last) {
@@ -98,10 +102,11 @@ export function createScene() {
     document.body.dataset.sceneFallback = 'true';
     throw error;
   }
+  delete document.body.dataset.sceneFallback;
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(43, 1, 0.1, 100);
-  camera.position.set(0, 0, 8);
+  camera.position.set(0, 0, 9.5);
 
   const pointGeometry = new BufferGeometry();
   pointGeometry.setAttribute('position', new Float32BufferAttribute(network.positions, 3));
@@ -113,7 +118,7 @@ export function createScene() {
     transparent: true,
     depthWrite: false,
     vertexColors: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     uniforms: {
       uTime: { value: 0 },
       uPixelRatio: { value: 1 },
@@ -150,7 +155,7 @@ export function createScene() {
       void main() {
         float radius = length(gl_PointCoord - vec2(0.5));
         float alpha = (1.0 - smoothstep(0.08, 0.5, radius)) * vFade;
-        gl_FragColor = vec4(vColor, alpha * 0.88);
+        gl_FragColor = vec4(vColor, alpha * 0.62);
       }
     `
   });
@@ -164,7 +169,7 @@ export function createScene() {
   const linkMaterial = new LineBasicMaterial({
     vertexColors: true,
     transparent: true,
-    opacity: 0.25,
+    opacity: 0.12,
     depthWrite: false,
     blending: AdditiveBlending
   });
@@ -264,7 +269,7 @@ export function createScene() {
 
     const delta = Math.min((now - lastFrameTime) / 1000, 0.05);
     lastFrameTime = now;
-    camera.position.z = 8 - scrollProgress * 61;
+    camera.position.z = 9.5 - scrollProgress * 70;
     camera.position.x += (Math.sin(scrollProgress * Math.PI * 6) * 1.25 - camera.position.x) * 0.025;
     camera.position.y += (Math.cos(scrollProgress * Math.PI * 4) * 0.42 - camera.position.y) * 0.025;
     pointMaterial.uniforms.uTime.value += delta;
@@ -313,7 +318,31 @@ export function createScene() {
   window.addEventListener('scroll', updateScroll, { passive: true });
   if (!isMobile) window.addEventListener('pointermove', updatePointer, { passive: true });
   if (isMobile && 'DeviceOrientationEvent' in window) {
-    window.addEventListener('deviceorientation', updateOrientation, { passive: true });
+    const orientationApi = window.DeviceOrientationEvent;
+    if (typeof orientationApi.requestPermission === 'function') {
+      const sensorButton = document.createElement('button');
+      sensorButton.className = 'btn btn-secondary motion-toggle';
+      sensorButton.type = 'button';
+      sensorButton.textContent = 'Activer la parallaxe';
+      sensorButton.addEventListener('click', async () => {
+        try {
+          const permission = await orientationApi.requestPermission();
+          if (permission !== 'granted') {
+            sensorButton.textContent = 'Accès capteur refusé';
+            return;
+          }
+          window.addEventListener('deviceorientation', updateOrientation, { passive: true });
+          sensorButton.textContent = 'Parallaxe activée';
+          sensorButton.setAttribute('aria-pressed', 'true');
+          sensorButton.disabled = true;
+        } catch {
+          sensorButton.textContent = 'Capteur indisponible';
+        }
+      });
+      document.querySelector('.hero-ctas')?.append(sensorButton);
+    } else {
+      window.addEventListener('deviceorientation', updateOrientation, { passive: true });
+    }
   }
   document.addEventListener('visibilitychange', handleVisibility);
   window.addEventListener('pagehide', handlePageHide);

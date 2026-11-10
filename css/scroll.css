@@ -22,6 +22,9 @@
   will-change: transform, opacity;
 }
 
+.hero-word { display: inline-block; white-space: nowrap; }
+.hero-space { display: inline; }
+
 .timeline::before {
   transform: scaleY(var(--timeline-reveal, 0));
   transform-origin: top center;

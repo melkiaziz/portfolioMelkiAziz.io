@@ -12,7 +12,11 @@ async function loadLocalModule(path) {
   if (!response.ok) throw new Error(`Unable to load ${path}.`);
   const source = await response.text();
   const moduleUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
-  return import(moduleUrl);
+  try {
+    return await import(moduleUrl);
+  } finally {
+    URL.revokeObjectURL(moduleUrl);
+  }
 }
 
 function trackReady(task) {
@@ -48,19 +52,22 @@ if (!reducedMotion.matches) {
   trackReady(loadLocalModule('js/scroll.js')
     .then(({ initScrollExperience }) => initScrollExperience())
     .catch(error => console.warn('Scroll animations unavailable; native scrolling remains active.', error)));
-  trackReady(loadLocalModule('js/skills.js')
-    .then(({ initSkills }) => initSkills())
-    .catch(error => console.warn('Skills constellation unavailable.', error)));
-  trackReady(loadLocalModule('js/projects.js')
-    .then(({ initProjects }) => initProjects())
-    .catch(error => console.warn('Project details unavailable; project links remain active.', error)));
   trackReady(loadLocalModule('js/cursor.js')
     .then(({ initCursor }) => initCursor())
     .catch(error => console.warn('Custom cursor unavailable; native pointer remains active.', error)));
-  trackReady(loadLocalModule('js/contact.js')
-    .then(({ initContact }) => initContact())
-    .catch(error => console.warn('Contact micro-interactions unavailable.', error)));
 }
+trackReady(loadLocalModule('js/skills.js')
+  .then(({ initSkills }) => initSkills())
+  .catch(error => console.warn('Skills constellation unavailable.', error)));
+trackReady(loadLocalModule('js/projects.js')
+  .then(({ initProjects }) => initProjects())
+  .catch(error => console.warn('Project details unavailable; project links remain active.', error)));
+trackReady(loadLocalModule('js/contact.js')
+  .then(({ initContact }) => initContact())
+  .catch(error => console.warn('Contact micro-interactions unavailable.', error)));
+trackReady(loadLocalModule('js/secret.js')
+  .then(({ initEasterEgg }) => initEasterEgg())
+  .catch(error => console.warn('Palette easter egg unavailable.', error)));
 trackReady(sceneReady);
 
 Promise.all(readyTasks).then(() => {

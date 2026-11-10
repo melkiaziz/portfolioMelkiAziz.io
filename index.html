@@ -11,17 +11,20 @@
     <title>Melki Mohamed Aziz | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" as="font" type="font/woff2" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="css/experience.css?v=2" />
-    <link rel="stylesheet" href="css/scroll.css" />
+    <link rel="stylesheet" href="css/experience.css?v=3" />
+    <link rel="stylesheet" href="css/scroll.css?v=2" />
     <link rel="stylesheet" href="css/skills.css" />
     <link rel="stylesheet" href="css/projects.css" />
     <link rel="stylesheet" href="css/cursor.css" />
     <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/secret.css" />
     <script type="importmap">
       {
         "imports": {
@@ -55,7 +58,7 @@
           <span class="logo-badge">MA</span>
           <span>Aziz.dev</span>
         </a>
-        <div class="nav-links-wrap">
+        <div class="nav-links-wrap" id="primary-navigation">
           <a href="#about" class="nav-link-item">À propos</a>
           <a href="#experience" class="nav-link-item">Expériences</a>
           <a href="#projects" class="nav-link-item">Projets</a>
@@ -63,7 +66,7 @@
           <a href="#certifications" class="nav-link-item">Certifications</a>
           <a href="#contact" class="btn btn-secondary nav-cta">Me contacter</a>
         </div>
-        <button class="mobile-nav-toggle" aria-label="Menu principal" id="nav-toggle">
+        <button class="mobile-nav-toggle" aria-label="Ouvrir le menu principal" aria-controls="primary-navigation" aria-expanded="false" id="nav-toggle">
           ☰
         </button>
       </nav>
@@ -125,7 +128,7 @@
 
         <div class="hero-right">
           <div class="portrait-frame">
-            <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" />
+            <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" width="200" height="200" decoding="async" fetchpriority="high" />
             <div class="floating-badge badge-xp">
               <span class="number">5</span>
               <span class="label">Ans<br/>d'études</span>
@@ -362,7 +365,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Esprit Academic Warehouse</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard1.png" alt="ESPRIT Data Warehouse Power BI Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard1.webp" alt="ESPRIT Data Warehouse Power BI Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -397,7 +400,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">Healthcare BI App</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard2.png" alt="Healthcare Analytics Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard2.webp" alt="Healthcare Analytics Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -432,7 +435,7 @@
                   <span class="terminal-tab-name" style="margin-left:auto; font-size: 0.7rem;">SNCFT Online Ticket</span>
                 </div>
                 <div class="mock-content">
-                  <img src="images/dashboard3.png" alt="SNCFT Booking Analytics Dashboard" class="project-img" />
+                  <img src="images/optimized/dashboard3.webp" alt="SNCFT Booking Analytics Dashboard" class="project-img" width="1400" height="788" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -743,7 +746,7 @@
               Compréhension approfondie des architectures cloud AWS, de la sécurité des infrastructures, du stockage, des réseaux et des concepts fondamentaux de facturation cloud.
             </p>
             <div class="cert-visual-container">
-              <img src="images/certificat aws.png" alt="AWS Academy Cloud Foundations Certificate" class="cert-preview-img" />
+              <img src="images/optimized/certificat-aws.webp" alt="AWS Academy Cloud Foundations Certificate" class="cert-preview-img" width="806" height="621" loading="lazy" decoding="async" />
             </div>
             <a href="images/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20251113-31-3ndpur.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir la certification &rarr;
@@ -759,7 +762,7 @@
               Validation des connaissances fondamentales sur les chaînes de blocs, les applications décentralisées (dApps), l'architecture de consensus, la cryptographie et le développement Solidity.
             </p>
             <div class="cert-visual-container">
-              <img src="images/certificat blockchain.png" alt="Certification Blockchain" class="cert-preview-img" />
+              <img src="images/optimized/certificat-blockchain.webp" alt="Certification Blockchain" class="cert-preview-img" width="1200" height="641" loading="lazy" decoding="async" />
             </div>
             <a href="images/Certificat%20Blockchain.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir la certification &rarr;
@@ -776,7 +779,7 @@
             </p>
             <!-- Visual display of DL certificate PNG -->
             <div class="cert-visual-container">
-              <img src="images/Fundamentals%20of%20Deep%20Learning.png" alt="Fundamentals of Deep Learning Certificate" class="cert-preview-img" />
+              <img src="images/optimized/deep-learning.webp" alt="Fundamentals of Deep Learning Certificate" class="cert-preview-img" width="849" height="1200" loading="lazy" decoding="async" />
             </div>
             <a href="images/Fundamentals%20of%20Deep%20Learning.png" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir le certificat &rarr;
@@ -792,7 +795,7 @@
               Certificat IELTS officiel attestant d'une maîtrise de la langue anglaise pour la communication académique et professionnelle.
             </p>
             <div class="cert-visual-container">
-              <img src="images/ilets.png" alt="Certificat IELTS" class="cert-preview-img" />
+              <img src="images/optimized/ielts.webp" alt="Certificat IELTS" class="cert-preview-img" width="552" height="790" loading="lazy" decoding="async" />
             </div>
             <a href="images/ilets Melki Aziz.pdf" target="_blank" rel="noreferrer" class="cert-action-btn">
               Agrandir le certificat &rarr;

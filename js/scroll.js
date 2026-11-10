@@ -22,19 +22,27 @@ export function initScrollExperience() {
   const title = document.querySelector('#home h1');
   const animatedName = title?.querySelector('span');
   if (title && animatedName) {
-    const fullTitle = title.textContent.replace(/\s+/g, ' ').trim();
+    const fullTitle = title.innerText.replace(/\s+/g, ' ').trim();
     const name = animatedName.textContent;
     title.setAttribute('aria-label', fullTitle);
     animatedName.setAttribute('aria-hidden', 'true');
-    animatedName.replaceChildren(...Array.from(name, character => {
-      const letter = document.createElement('span');
-      letter.className = 'hero-letter';
-      letter.textContent = character === ' ' ? '\u00a0' : character;
-      return letter;
+    animatedName.replaceChildren(...name.split(' ').flatMap((word, index) => {
+      const wordElement = document.createElement('span');
+      wordElement.className = 'hero-word';
+      wordElement.append(...Array.from(word, character => {
+        const letter = document.createElement('span');
+        letter.className = 'hero-letter';
+        letter.textContent = character;
+        return letter;
+      }));
+      if (index === 0) return [wordElement];
+      const space = document.createElement('span');
+      space.className = 'hero-space';
+      space.textContent = '\u00a0';
+      return [space, wordElement];
     }));
-    gsap.fromTo(animatedName.children, { yPercent: 110, autoAlpha: 0, rotate: 3 }, {
+    gsap.fromTo(animatedName.querySelectorAll('.hero-letter'), { yPercent: 18, rotate: 2 }, {
       yPercent: 0,
-      autoAlpha: 1,
       rotate: 0,
       duration: 0.55,
       stagger: 0.025,
