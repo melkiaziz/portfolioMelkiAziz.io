@@ -54,6 +54,9 @@ if (!reducedMotion.matches) {
   trackReady(loadLocalModule('js/projects.js')
     .then(({ initProjects }) => initProjects())
     .catch(error => console.warn('Project details unavailable; project links remain active.', error)));
+  trackReady(loadLocalModule('js/cursor.js')
+    .then(({ initCursor }) => initCursor())
+    .catch(error => console.warn('Custom cursor unavailable; native pointer remains active.', error)));
 }
 trackReady(sceneReady);
 

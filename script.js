@@ -12,74 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
       (navigator.msMaxTouchPoints > 0));
   };
 
-  /* ── 1. Custom kinetic cursor ────────────────────────────────────────────── */
-  const cursorDot = document.getElementById('cursor-dot');
-  const cursorRing = document.getElementById('cursor-ring');
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-  
-  let targetMouseX = mouseX;
-  let targetMouseY = mouseY;
-
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  if (cursorDot && cursorRing && !isTouchDevice() && !reducedMotionQuery.matches) {
-    document.body.classList.add('custom-cursor-active');
-    cursorDot.style.display = 'block';
-    cursorRing.style.display = 'block';
-
-    document.addEventListener('mousemove', (e) => {
-      targetMouseX = e.clientX;
-      targetMouseY = e.clientY;
-      
-      // Set CSS variables for spotlight gradients
-      document.documentElement.style.setProperty('--mouse-x', `${targetMouseX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${targetMouseY}px`);
-    });
-
-    // Lerp loop for fluid trailing effect
-    let cursorAnimationId;
-    const tickCursor = () => {
-      if (document.hidden) return;
-
-      // Direct placement for dot
-      mouseX = targetMouseX;
-      mouseY = targetMouseY;
-      
-      // Lerp for outer ring
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
-      
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-
-      cursorAnimationId = requestAnimationFrame(tickCursor);
-    };
-    tickCursor();
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(cursorAnimationId);
-      } else {
-        tickCursor();
-      }
-    });
-
-    // Hover effect on links and buttons
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .cert-card, .highlight-box, .filter-btn');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
-    });
-  }
-
-
-  /* ── 3. Neural Data Constellation Particles (Canvas) ─────────────────────── */
+  /* ── 2. Legacy Canvas Fallback ───────────────────────────────────────────── */
   const canvas = document.getElementById('data-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -356,43 +291,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ── 8. Mobile Navigation Toggle ─────────────────────────────────────────── */
+  /* ── 1. Legacy Canvas Fallback ───────────────────────────────────────────── */
   const navToggle = document.getElementById('nav-toggle');
   const navLinksWrap = document.querySelector('.nav-links-wrap');
 
   if (navToggle && navLinksWrap) {
+    function setMenuOpen(isOpen) {
+      navLinksWrap.classList.toggle('is-open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Fermer le menu principal' : 'Ouvrir le menu principal');
+      navToggle.textContent = isOpen ? '×' : '☰';
+    }
+
+    setMenuOpen(false);
     navToggle.addEventListener('click', () => {
-      // Simple toggle implementation for mobile
-      if (navLinksWrap.style.display === 'flex') {
-        navLinksWrap.style.display = 'none';
-        navToggle.textContent = '☰';
-      } else {
-        navLinksWrap.style.display = 'flex';
-        navLinksWrap.style.flexDirection = 'column';
-        navLinksWrap.style.position = 'absolute';
-        navLinksWrap.style.top = '100%';
-        navLinksWrap.style.left = '0';
-        navLinksWrap.style.right = '0';
-        navLinksWrap.style.background = 'rgba(5, 7, 20, 0.95)';
-        navLinksWrap.style.border = '1px solid var(--glass-border)';
-        navLinksWrap.style.borderRadius = '16px';
-        navLinksWrap.style.padding = '1.5rem';
-        navLinksWrap.style.marginTop = '0.5rem';
-        navLinksWrap.style.gap = '1rem';
-        navToggle.textContent = '✕';
-      }
+      setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true');
     });
-
-    // Close menu when clicking links on mobile
-    const links = navLinksWrap.querySelectorAll('a');
-    links.forEach(l => {
-      l.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          navLinksWrap.style.display = 'none';
-          navToggle.textContent = '☰';
-        }
-      });
+    navLinksWrap.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => setMenuOpen(false));
     });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 700) setMenuOpen(false);
+    }, { passive: true });
   }
-
 });
