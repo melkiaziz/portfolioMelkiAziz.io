@@ -11,44 +11,36 @@
     <title>Melki Mohamed Aziz | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/experience.css" />
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+          "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.14.2/index.js",
+          "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.14.2/ScrollTrigger.js"
         }
       }
     </script>
   </head>
   <body>
-    <!-- Canvas for Neural Data Constellation Particles -->
-    <canvas id="data-canvas"></canvas>
-
-    <!-- Floating Neon Backdrop Glows -->
-    <div class="ambient-glows">
-      <div class="glow-orb glow-1"></div>
-      <div class="glow-orb glow-2"></div>
-      <div class="glow-orb glow-3"></div>
-    </div>
+    <canvas id="scene-canvas" aria-hidden="true"></canvas>
 
     <!-- Custom Tech Cursors -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-ring" id="cursor-ring"></div>
 
-    <!-- Interactive Bootloader Screen -->
-    <div id="loader">
-      <div class="loader-terminal">
-        <div class="loader-header">
-          <span class="loader-dot"></span>
-          <span class="loader-dot"></span>
-          <span class="loader-dot"></span>
-        </div>
-        <div class="loader-content" id="loader-content">
-          <!-- Populated dynamically via JS -->
-        </div>
-        <div class="loader-progress-bar"></div>
-        <div class="scanline"></div>
+    <div id="loader" role="status" aria-live="polite" aria-label="Chargement du portfolio">
+      <div class="loader-mark" aria-hidden="true">MA<span>.</span></div>
+      <p class="loader-caption">Initialisation de l'univers</p>
+      <div class="loader-meter" role="progressbar" aria-label="Chargement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="loader-progress-bar" id="loader-progress"></span>
       </div>
+      <span class="loader-percent" id="loader-percent">0%</span>
     </div>
 
     <!-- Floating Navigation Bar -->
@@ -127,7 +119,6 @@
         </div>
 
         <div class="hero-right">
-          <canvas class="hero-scene-canvas" id="hero-scene" aria-hidden="true"></canvas>
           <div class="portrait-frame">
             <img src="images/aziz.jfif" alt="Portrait de Melki Mohamed Aziz" class="portrait-img" />
             <div class="floating-badge badge-xp">
@@ -857,6 +848,18 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="hero-scene.js"></script>
+    <script>
+      fetch('js/app.js')
+        .then(response => {
+          if (!response.ok) throw new Error('Portfolio module unavailable.');
+          return response.text();
+        })
+        .then(source => import(URL.createObjectURL(new Blob([source], { type: 'text/javascript' }))))
+        .catch(error => {
+          document.body.dataset.sceneFallback = 'true';
+          document.getElementById('loader')?.classList.add('fade-out');
+          console.error('Portfolio initialization failed.', error);
+        });
+    </script>
   </body>
 </html>

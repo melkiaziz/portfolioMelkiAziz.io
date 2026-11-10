@@ -12,59 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       (navigator.msMaxTouchPoints > 0));
   };
 
-  /* ── 1. Tech Bootloader / Loader ─────────────────────────────────────────── */
-  const loader = document.getElementById('loader');
-  const loaderContent = document.getElementById('loader-content');
-  
-  const bootLines = [
-    { text: '[SYS_INIT] Initialisation du noyau Aziz.dev...', type: 'info' },
-    { text: '[SYS_INIT] Chargement des configurations système...', type: 'info' },
-    { text: '[SQL_CONN] Connexion à la base de données PostgreSQL...', type: 'accent' },
-    { text: '[SQL_CONN] Succès. Pool de connexions disponible.', type: 'success' },
-    { text: '[BI_MODULE] Indexation des schémas d\'entrepôts de données...', type: 'accent' },
-    { text: '[BI_MODULE] Chargement des dashboards Power BI...', type: 'info' },
-    { text: '[WEB_MODULE] Initialisation du runtime Angular & Node.js...', type: 'info' },
-    { text: '[BLOCKCHAIN] Compilation des Smart Contracts Solidity...', type: 'accent' },
-    { text: '[BLOCKCHAIN] Réseau Ethereum local : connecté.', type: 'success' },
-    { text: '[SYSTEM] Initialisation de l\'interface visuelle de particules...', type: 'info' },
-    { text: '[SYSTEM] Melki Mohamed Aziz - Portfolio v2.0 est en ligne.', type: 'success' }
-  ];
-
-  let lineIdx = 0;
-  function printLoaderLines() {
-    if (lineIdx < bootLines.length) {
-      const lineData = bootLines[lineIdx];
-      const lineDiv = document.createElement('div');
-      lineDiv.className = 'loader-line';
-      if (lineData.type === 'accent') lineDiv.classList.add('accent');
-      if (lineData.type === 'success') lineDiv.classList.add('success');
-      
-      lineDiv.innerHTML = `<span style="color:#6b7280;margin-right:8px;">&gt;</span>${lineData.text}`;
-      loaderContent.appendChild(lineDiv);
-      
-      // Auto scroll
-      loaderContent.scrollTop = loaderContent.scrollHeight;
-      lineIdx++;
-      setTimeout(printLoaderLines, Math.random() * 150 + 80);
-    }
-  }
-
-  // Start printing boot lines
-  if (loaderContent) {
-    printLoaderLines();
-  }
-
-  // Force dismiss loader after 2.5s
-  setTimeout(() => {
-    if (loader) {
-      loader.classList.add('fade-out');
-      // Trigger skill bars animation after loader fades out
-      setTimeout(initSkillsAnimate, 600);
-    }
-  }, 2600);
-
-
-  /* ── 2. Custom kinetic cursor ────────────────────────────────────────────── */
+  /* ── 1. Custom kinetic cursor ────────────────────────────────────────────── */
   const cursorDot = document.getElementById('cursor-dot');
   const cursorRing = document.getElementById('cursor-ring');
 
@@ -358,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  document.addEventListener('portfolio:ready', initSkillsAnimate, { once: true });
 
 
   /* ── 7. AJAX Contact Form ────────────────────────────────────────────────── */
