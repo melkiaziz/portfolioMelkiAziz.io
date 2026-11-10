@@ -395,29 +395,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── 9. Card 3D Tilt Effect ──────────────────────────────────────────────── */
-  const cards = document.querySelectorAll('.project-card, .cert-card');
-  if (cards.length > 0 && !isTouchDevice()) {
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const xc = rect.width / 2;
-        const yc = rect.height / 2;
-        const dx = x - xc;
-        const dy = y - yc;
-        
-        // Rotate maximum 6 degrees
-        const rx = -(dy / yc) * 6;
-        const ry = (dx / xc) * 6;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      });
-    });
-  }
 });

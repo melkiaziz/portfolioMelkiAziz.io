@@ -51,6 +51,9 @@ if (!reducedMotion.matches) {
   trackReady(loadLocalModule('js/skills.js')
     .then(({ initSkills }) => initSkills())
     .catch(error => console.warn('Skills constellation unavailable.', error)));
+  trackReady(loadLocalModule('js/projects.js')
+    .then(({ initProjects }) => initProjects())
+    .catch(error => console.warn('Project details unavailable; project links remain active.', error)));
 }
 trackReady(sceneReady);
 
