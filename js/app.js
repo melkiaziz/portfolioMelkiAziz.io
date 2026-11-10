@@ -57,6 +57,9 @@ if (!reducedMotion.matches) {
   trackReady(loadLocalModule('js/cursor.js')
     .then(({ initCursor }) => initCursor())
     .catch(error => console.warn('Custom cursor unavailable; native pointer remains active.', error)));
+  trackReady(loadLocalModule('js/contact.js')
+    .then(({ initContact }) => initContact())
+    .catch(error => console.warn('Contact micro-interactions unavailable.', error)));
 }
 trackReady(sceneReady);
 
