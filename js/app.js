@@ -48,6 +48,9 @@ if (!reducedMotion.matches) {
   trackReady(loadLocalModule('js/scroll.js')
     .then(({ initScrollExperience }) => initScrollExperience())
     .catch(error => console.warn('Scroll animations unavailable; native scrolling remains active.', error)));
+  trackReady(loadLocalModule('js/skills.js')
+    .then(({ initSkills }) => initSkills())
+    .catch(error => console.warn('Skills constellation unavailable.', error)));
 }
 trackReady(sceneReady);
 

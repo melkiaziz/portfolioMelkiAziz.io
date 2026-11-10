@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="css/experience.css" />
     <link rel="stylesheet" href="css/scroll.css" />
+    <link rel="stylesheet" href="css/skills.css" />
     <script type="importmap">
       {
         "imports": {
@@ -533,9 +534,25 @@
         <h2 class="section-title">Mon <span>Arsenal Technique</span></h2>
         <p class="section-desc">Expertise couvrant l'analyse de données, l'ingénierie décisionnelle, le développement d'applications et les protocoles Web3.</p>
 
+        <div class="skills-constellation" role="tablist" aria-label="Domaines de compétences">
+          <button class="skill-node is-active" type="button" role="tab" id="skill-tab-bi" aria-selected="true" aria-controls="skill-cluster-detail" tabindex="0" data-skill-cluster="bi">
+            <span class="skill-node-index">01</span><span>BI &amp; Data</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-chain" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="blockchain">
+            <span class="skill-node-index">02</span><span>Blockchain</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-web" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="web">
+            <span class="skill-node-index">03</span><span>Full-stack Web</span>
+          </button>
+          <button class="skill-node" type="button" role="tab" id="skill-tab-ai" aria-selected="false" aria-controls="skill-cluster-detail" tabindex="-1" data-skill-cluster="ai">
+            <span class="skill-node-index">04</span><span>IA &amp; ML</span>
+          </button>
+        </div>
+        <div class="skill-cluster-detail" id="skill-cluster-detail" role="tabpanel" aria-live="polite" aria-labelledby="skill-tab-bi"></div>
+
         <div class="skills-grid">
           <!-- Card 1: BI & Data -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-bi" data-skill-group="bi">
             <h3>Data &amp; Business Intelligence</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -578,7 +595,7 @@
           </div>
 
           <!-- Card 2: Frontend -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-frontend" data-skill-group="web">
             <h3>Développement Frontend</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -621,7 +638,7 @@
           </div>
 
           <!-- Card 3: Backend -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-backend" data-skill-group="web">
             <h3>Développement Backend</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -655,7 +672,7 @@
           </div>
 
           <!-- Card 4: Web3 & DevOps -->
-          <div class="skill-category-card">
+          <div class="skill-category-card" id="skill-card-blockchain" data-skill-group="blockchain">
             <h3>Blockchain &amp; DevOps</h3>
             <div class="skill-items-list">
               <div class="skill-item-row">
@@ -694,6 +711,15 @@
                   <div class="skill-bar-inner" data-val="70%"></div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="skill-category-card" id="skill-card-ai" data-skill-group="ai">
+            <h3>Intelligence Artificielle &amp; Machine Learning</h3>
+            <div class="skill-items-list">
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">BERT / NLP</span><span class="skill-percentage">84%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="84%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">Graph-RAG</span><span class="skill-percentage">80%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="80%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">TensorFlow</span><span class="skill-percentage">76%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="76%"></div></div></div>
+              <div class="skill-item-row"><div class="skill-label-info"><span class="skill-name">Machine Learning</span><span class="skill-percentage">78%</span></div><div class="skill-bar-outer"><div class="skill-bar-inner" data-val="78%"></div></div></div>
             </div>
           </div>
         </div>
